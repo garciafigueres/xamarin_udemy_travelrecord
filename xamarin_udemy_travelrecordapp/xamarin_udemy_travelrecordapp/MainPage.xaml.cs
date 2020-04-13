@@ -20,7 +20,16 @@ namespace xamarin_udemy_travelrecordapp
 
         private void LoginButton_Clicked(object sender, EventArgs e)
         {
+            bool isEmailEmpty = string.IsNullOrEmpty(emailEntry.Text);
+            bool isPasswordEmpty = string.IsNullOrEmpty(passwordEntry.Text);
 
+            if(isEmailEmpty || isPasswordEmpty)
+            {
+
+            } else
+            {
+
+            }
         }
     }
 }
