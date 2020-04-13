@@ -28,7 +28,7 @@ namespace xamarin_udemy_travelrecordapp
 
             } else
             {
-
+                Navigation.PushAsync(new HomePage());
             }
         }
     }
