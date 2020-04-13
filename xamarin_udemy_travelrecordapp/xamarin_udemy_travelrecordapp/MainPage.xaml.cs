@@ -17,5 +17,10 @@ namespace xamarin_udemy_travelrecordapp
         {
             InitializeComponent();
         }
+
+        private void LoginButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
