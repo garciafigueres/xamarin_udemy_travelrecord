@@ -26,7 +26,18 @@ namespace xamarin_udemy_travelrecordapp
                 var posts = conn.Table<Post>().ToList();
                 postListView.ItemsSource = posts;
             }
-            
+
+        }
+
+        private void postListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var selectedPost = postListView.SelectedItem as Post;
+
+            if (selectedPost != null)
+            {
+                Navigation.PushAsync(new PostDetailPage(selectedPost));
+            }
+
         }
     }
 }
