@@ -5,9 +5,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="xamarin_udemy_travelrecordapp.HistoryPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to the History Page"/>
-        </StackLayout>
-    </ContentPage.Content>
+
+    <ListView x:Name="postListView">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Experience}"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    
 </ContentPage>
