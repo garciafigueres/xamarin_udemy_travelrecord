@@ -18,10 +18,14 @@ namespace xamarin_udemy_travelrecordapp
         {
             base.OnAppearing();
 
-            SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation);
-            conn.CreateTable<Post>();
-            var posts = conn.Table<Post>().ToList();
-            conn.Close();
+            // Con el bloque using nos aseguramos de que se llama al método dispose al salir
+            // del mismo, ya que la clase SQLiteConnection ya incluye la interfaz IDisposable.
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<Post>();
+                var posts = conn.Table<Post>().ToList();
+            }
+            
         }
     }
 }
