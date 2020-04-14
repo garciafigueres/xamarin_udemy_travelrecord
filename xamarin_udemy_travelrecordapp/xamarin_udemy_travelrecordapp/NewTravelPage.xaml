@@ -5,9 +5,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="xamarin_udemy_travelrecordapp.NewTravelPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save"
+                     Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to New Travel Page"/>
+            <Entry x:Name="experienceEntry"
+                   Placeholder="Write your experience"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
