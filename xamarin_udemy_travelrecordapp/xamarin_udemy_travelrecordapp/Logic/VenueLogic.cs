@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,7 @@ namespace xamarin_udemy_travelrecordapp.Logic
         {
             List<Venue> venues = new List<Venue>();
 
-            var url = Venue.GenerateURL(latitude, longitude);
+            var url = VenueRoot.GenerateURL(latitude, longitude);
 
             // Con el using nos aseguramos de que al finalizar la ejecución de este bloque
             // se hace un dispose automáticamente.
@@ -21,6 +23,10 @@ namespace xamarin_udemy_travelrecordapp.Logic
             {
                 var response = await client.GetAsync(url);
                 var json = await response.Content.ReadAsStringAsync();
+
+                var venueRoot = JsonConvert.DeserializeObject<VenueRoot>(json);
+
+                venues = venueRoot.response.venues as List<Venue>;
             }
 
             return venues;
