@@ -1,8 +1,10 @@
-﻿using SQLite;
+﻿using Plugin.Geolocator;
+using SQLite;
 using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_udemy_travelrecordapp.Logic;
 using xamarin_udemy_travelrecordapp.Model;
 
 namespace xamarin_udemy_travelrecordapp
@@ -13,6 +15,16 @@ namespace xamarin_udemy_travelrecordapp
         public NewTravelPage()
         {
             InitializeComponent();
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var locator = CrossGeolocator.Current;
+            var position = await locator.GetPositionAsync();
+
+            var venues = VenueLogic.GetVenues(position.Latitude, position.Longitude);
         }
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
