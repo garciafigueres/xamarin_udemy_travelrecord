@@ -2,6 +2,7 @@
 using Plugin.Geolocator.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,15 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_udemy_travelrecordapp.Model;
 
 namespace xamarin_udemy_travelrecordapp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
     public partial class MapPage : ContentPage
     {
+
         private bool hasLocationPermission = false;
         public MapPage()
         {
@@ -67,6 +71,45 @@ namespace xamarin_udemy_travelrecordapp
             }
 
             GetLocation();
+
+
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<Post>();
+                var posts = conn.Table<Post>().ToList();
+
+                DisplayInMap(posts);
+            }
+
+        }
+
+        private void DisplayInMap(List<Post> posts)
+        {
+            foreach (var post in posts)
+            {
+                try
+                {
+                    var position = new Xamarin.Forms.Maps.Position(post.Latitude, post.Longitude);
+                    var pin = new Xamarin.Forms.Maps.Pin()
+                    {
+                        Type = Xamarin.Forms.Maps.PinType.SavedPin,
+                        Position = position,
+                        Label = post.VenueName,
+                        Address = post.Address
+                    };
+
+                    locationsMap.Pins.Add(pin);
+                }
+                catch (NullReferenceException nre)
+                {
+
+                    throw;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
         }
 
         protected override void OnDisappearing()
@@ -100,4 +143,5 @@ namespace xamarin_udemy_travelrecordapp
             locationsMap.MoveToRegion(span);
         }
     }
+
 }

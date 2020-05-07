@@ -25,7 +25,6 @@ namespace xamarin_udemy_travelrecordapp
                 conn.CreateTable<Post>();
                 var posts = conn.Table<Post>().ToList();
                 postListView.ItemsSource = posts;
-
             }
 
         }
