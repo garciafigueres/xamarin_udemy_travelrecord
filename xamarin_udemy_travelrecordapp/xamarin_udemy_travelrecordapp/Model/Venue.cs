@@ -30,11 +30,6 @@ namespace xamarin_udemy_travelrecordapp.Model
         public bool primary { get; set; }
     }
 
-    public class VenuePage
-    {
-        public string id { get; set; }
-    }
-
     public class Venue
     {
         public string id { get; set; }

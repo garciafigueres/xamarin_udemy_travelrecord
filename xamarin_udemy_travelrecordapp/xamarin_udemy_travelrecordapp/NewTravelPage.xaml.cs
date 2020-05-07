@@ -1,7 +1,7 @@
 ﻿using Plugin.Geolocator;
 using SQLite;
 using System;
-
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarin_udemy_travelrecordapp.Logic;
@@ -30,25 +30,45 @@ namespace xamarin_udemy_travelrecordapp
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            Post post = new Post()
+            try
             {
-                Experience = experienceEntry.Text
-            };
+                var selectedVenue = venueListView.SelectedItem as Venue;
+                var firstCategory = selectedVenue.categories.FirstOrDefault();  // A venue can have more than one categories. We're only taking one.
 
-            // Con el bloque using nos aseguramos de que se llama al método dispose al salir
-            // del mismo, ya que la clase SQLiteConnection ya incluye la interfaz IDisposable.
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Post>();
-                int rows = conn.Insert(post);
-                conn.Close();
+                Post post = new Post()
+                {
+                    Experience = experienceEntry.Text,
+                    CategoryId = firstCategory.id,
+                    CategoryName = firstCategory.name,
+                    Address = selectedVenue.location.address,
+                    Distance = selectedVenue.location.distance,
+                    Latitude = selectedVenue.location.lat,
+                    Longitude = selectedVenue.location.lng,
+                    VenueName = selectedVenue.name
+                };
 
-                if (rows > 0)
-                    DisplayAlert("Success", "Experience succesfully inserted", "Ok");
-                else
-                    DisplayAlert("Failure", "Experience failed to be inserted", "Ok");
+                // Con el bloque using nos aseguramos de que se llama al método dispose al salir
+                // del mismo, ya que la clase SQLiteConnection ya incluye la interfaz IDisposable.
+                using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+                {
+                    conn.CreateTable<Post>();
+                    int rows = conn.Insert(post);
+                    conn.Close();
+
+                    if (rows > 0)
+                        DisplayAlert("Success", "Experience succesfully inserted", "Ok");
+                    else
+                        DisplayAlert("Failure", "Experience failed to be inserted", "Ok");
+                }
             }
-                
+            catch (NullReferenceException nre)
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }
