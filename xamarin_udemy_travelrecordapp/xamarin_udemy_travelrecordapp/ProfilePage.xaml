@@ -6,8 +6,24 @@
              mc:Ignorable="d"
              x:Class="xamarin_udemy_travelrecordapp.ProfilePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to the Profile Page"/>
+        <StackLayout Margin="20, 40, 20, 0">
+            <Label x:Name="postCountLabel" 
+                   HorizontalOptions="Center"
+                   Text=" - - "
+                   TextColor="DodgerBlue"
+                   FontAttributes="Bold"/>
+            <Label Text="posts"
+                   TextColor="LightGray"/>
+            <ListView x:Name="categoriesListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
