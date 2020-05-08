@@ -116,8 +116,13 @@ namespace xamarin_udemy_travelrecordapp
         {
             base.OnDisappearing();
 
-            CrossGeolocator.Current.StopListeningAsync();
-            CrossGeolocator.Current.PositionChanged -= Locator_PositionChanged;
+            //CrossGeolocator.Current.StopListeningAsync();
+            //CrossGeolocator.Current.PositionChanged -= Locator_PositionChanged;
+
+            var locator = CrossGeolocator.Current;
+            locator.PositionChanged -= Locator_PositionChanged;
+
+            locator.StopListeningAsync();
         }
 
         private void Locator_PositionChanged(object sender, PositionEventArgs e)

@@ -16,6 +16,10 @@ namespace xamarin_udemy_travelrecordapp
         public MainPage()
         {
             InitializeComponent();
+
+            var assembly = typeof(MainPage);
+
+            iconImage.Source = ImageSource.FromResource("xamarin_udemy_travelrecordapp.Assets.Images.plane.png", assembly);
         }
 
         private void LoginButton_Clicked(object sender, EventArgs e)
@@ -23,10 +27,11 @@ namespace xamarin_udemy_travelrecordapp
             bool isEmailEmpty = string.IsNullOrEmpty(emailEntry.Text);
             bool isPasswordEmpty = string.IsNullOrEmpty(passwordEntry.Text);
 
-            if(isEmailEmpty || isPasswordEmpty)
+            if (isEmailEmpty || isPasswordEmpty)
             {
 
-            } else
+            }
+            else
             {
                 Navigation.PushAsync(new HomePage());
             }
