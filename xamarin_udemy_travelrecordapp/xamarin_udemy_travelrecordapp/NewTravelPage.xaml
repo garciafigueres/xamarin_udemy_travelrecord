@@ -8,6 +8,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save"
+                     IconImageSource="save.png"
                      Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
 

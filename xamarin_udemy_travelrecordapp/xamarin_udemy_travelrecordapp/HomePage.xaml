@@ -6,11 +6,17 @@
              xmlns:local="clr-namespace:xamarin_udemy_travelrecordapp"
              mc:Ignorable="d"
              x:Class="xamarin_udemy_travelrecordapp.HomePage">
+
     <TabbedPage.ToolbarItems>
         <ToolbarItem Text="Add"
+                     IconImageSource="add.png"
                      Clicked="ToolbarItem_Clicked"/>
     </TabbedPage.ToolbarItems>
-    <local:HistoryPage Title="History"/>
-    <local:MapPage Title="Map"/>
-    <local:ProfilePage Title="Profile"/>
+
+    <local:HistoryPage Title="History"
+                       IconImageSource="home.png"/>
+    <local:MapPage Title="Map"
+                   IconImageSource="map.png"/>
+    <local:ProfilePage Title="Profile"
+                       IconImageSource="user.png"/>
 </TabbedPage>
