@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_udemy_travelrecordapp.Model;
 
 namespace xamarin_udemy_travelrecordapp
 {
@@ -17,16 +18,27 @@ namespace xamarin_udemy_travelrecordapp
             InitializeComponent();
         }
 
-        private void registerButton_Clicked(object sender, EventArgs e)
+        private async Task RegisterUser()
         {
             if (passwordEntry.Text == confirmPasswordEntry.Text)
             {
+                Users user = new Users()
+                {
+                    Email = emailEntry.Text,
+                    Password = passwordEntry.Text
+                };
 
+                await App.MobileService.GetTable<Users>().InsertAsync(user);
             }
             else
             {
-                DisplayAlert("Error", "Passwords don't match.", "OK");
+                await DisplayAlert("Error", "Passwords don't match.", "OK");
             }
+        }
+
+        private async void registerButton_Clicked(object sender, EventArgs e)
+        {
+            await RegisterUser();
         }
     }
 }

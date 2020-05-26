@@ -9,7 +9,7 @@ namespace xamarin_udemy_travelrecordapp
     {
         public static string DatabaseLocation = string.Empty;
 
-        public static MobileServiceClient client = new MobileServiceClient("https://gftravelrecordappxam.azurewebsites.net");
+        public static MobileServiceClient MobileService = new MobileServiceClient("https://gftravelrecordappxam.azurewebsites.net");
 
         public App()
         {
