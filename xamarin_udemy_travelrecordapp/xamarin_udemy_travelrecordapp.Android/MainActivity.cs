@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using System.IO;
 using Plugin.Permissions;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace xamarin_udemy_travelrecordapp.Droid
 {
@@ -24,6 +25,7 @@ namespace xamarin_udemy_travelrecordapp.Droid
             Xamarin.Essentials.Platform.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.FormsMaps.Init(this, bundle);
+            CurrentPlatform.Init();
 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
 

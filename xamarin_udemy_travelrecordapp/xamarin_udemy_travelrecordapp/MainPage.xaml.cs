@@ -32,5 +32,10 @@ namespace xamarin_udemy_travelrecordapp
                 Navigation.PushAsync(new HomePage());
             }
         }
+
+        private void registerUserButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new RegisterPage());
+        }
     }
 }
