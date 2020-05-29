@@ -4,7 +4,7 @@ using System.Text;
 
 namespace xamarin_udemy_travelrecordapp.Model
 {
-    class Users
+    public class Users
     {
         public string Id { get; set; }
         public string Email { get; set; }

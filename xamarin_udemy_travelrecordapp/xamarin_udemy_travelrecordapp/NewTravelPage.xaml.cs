@@ -28,7 +28,7 @@ namespace xamarin_udemy_travelrecordapp
             venueListView.ItemsSource = venues;
         }
 
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             try
             {
@@ -44,9 +44,11 @@ namespace xamarin_udemy_travelrecordapp
                     Distance = selectedVenue.location.distance,
                     Latitude = selectedVenue.location.lat,
                     Longitude = selectedVenue.location.lng,
-                    VenueName = selectedVenue.name
+                    VenueName = selectedVenue.name,
+                    UserId = App.user.Id,
                 };
 
+                /*
                 // Con el bloque using nos aseguramos de que se llama al método dispose al salir
                 // del mismo, ya que la clase SQLiteConnection ya incluye la interfaz IDisposable.
                 using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
@@ -60,14 +62,18 @@ namespace xamarin_udemy_travelrecordapp
                     else
                         DisplayAlert("Failure", "Experience failed to be inserted", "Ok");
                 }
+                */
+
+                await App.MobileService.GetTable<Post>().InsertAsync(post);
+                await DisplayAlert("Success", "Experience succesfully inserted", "Ok");
             }
             catch (NullReferenceException nre)
             {
-
+                await DisplayAlert("Failure", "Experience failed to be inserted", "Ok");
             }
             catch (Exception ex)
             {
-
+                await DisplayAlert("Failure", ex.Message, "Ok");
             }
         }
     }

@@ -16,7 +16,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -109,7 +108,7 @@
   <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\xamarin_udemy_travelrecordapp\xamarin_udemy_travelrecordapp.csproj">
-      <Project>{18B1FE2D-142A-4431-903C-5DF3C2E9FE3B}</Project>
+      <Project>{23B6DC90-A2AA-4CB2-BAE4-207D88B8F19B}</Project>
       <Name>xamarin_udemy_travelrecordapp</Name>
     </ProjectReference>
   </ItemGroup>

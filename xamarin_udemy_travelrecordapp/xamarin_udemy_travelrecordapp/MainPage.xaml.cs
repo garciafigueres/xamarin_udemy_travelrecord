@@ -36,14 +36,18 @@ namespace xamarin_udemy_travelrecordapp
 
                 if (user != null)
                 {
+                    App.user = user;
+
                     if (user.Password == passwordEntry.Text)
                     {
                         await Navigation.PushAsync(new HomePage());
-                    } else
+                    }
+                    else
                     {
                         await DisplayAlert("Error", "Email or password are incorrect.", "OK");
                     }
-                } else
+                }
+                else
                 {
                     await DisplayAlert("Error", "There was an error logging you in", "OK");
                 }

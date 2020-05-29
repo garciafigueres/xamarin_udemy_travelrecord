@@ -2,14 +2,15 @@
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_udemy_travelrecordapp.Model;
 
 namespace xamarin_udemy_travelrecordapp
 {
     public partial class App : Application
     {
         public static string DatabaseLocation = string.Empty;
-
         public static MobileServiceClient MobileService = new MobileServiceClient("https://gftravelrecordappxam.azurewebsites.net");
+        public static Users user = new Users();
 
         public App()
         {
