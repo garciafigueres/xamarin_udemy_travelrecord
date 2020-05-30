@@ -23,35 +23,12 @@ namespace xamarin_udemy_travelrecordapp
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            bool isEmailEmpty = string.IsNullOrEmpty(emailEntry.Text);
-            bool isPasswordEmpty = string.IsNullOrEmpty(passwordEntry.Text);
+            bool canLogin = await Users.Login(emailEntry.Text, passwordEntry.Text);
 
-            if (isEmailEmpty || isPasswordEmpty)
-            {
-
-            }
+            if (canLogin)
+                await Navigation.PushAsync(new HomePage());
             else
-            {
-                var user = (await App.MobileService.GetTable<Users>().Where(u => u.Email == emailEntry.Text).ToListAsync()).FirstOrDefault();
-
-                if (user != null)
-                {
-                    App.user = user;
-
-                    if (user.Password == passwordEntry.Text)
-                    {
-                        await Navigation.PushAsync(new HomePage());
-                    }
-                    else
-                    {
-                        await DisplayAlert("Error", "Email or password are incorrect.", "OK");
-                    }
-                }
-                else
-                {
-                    await DisplayAlert("Error", "There was an error logging you in", "OK");
-                }
-            }
+                await DisplayAlert("Error", "Try Again", "Ok");
         }
 
         private void registerUserButton_Clicked(object sender, EventArgs e)

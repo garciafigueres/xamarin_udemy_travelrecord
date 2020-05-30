@@ -1,10 +1,8 @@
 ﻿using Plugin.Geolocator;
-using SQLite;
 using System;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using xamarin_udemy_travelrecordapp.Logic;
 using xamarin_udemy_travelrecordapp.Model;
 
 namespace xamarin_udemy_travelrecordapp
@@ -24,7 +22,7 @@ namespace xamarin_udemy_travelrecordapp
             var locator = CrossGeolocator.Current;
             var position = await locator.GetPositionAsync();
 
-            var venues = await VenueLogic.GetVenues(position.Latitude, position.Longitude);
+            var venues = await Venue.GetVenues(position.Latitude, position.Longitude);
             venueListView.ItemsSource = venues;
         }
 
@@ -64,7 +62,7 @@ namespace xamarin_udemy_travelrecordapp
                 }
                 */
 
-                await App.MobileService.GetTable<Post>().InsertAsync(post);
+                Post.Insert(post);
                 await DisplayAlert("Success", "Experience succesfully inserted", "Ok");
             }
             catch (NullReferenceException nre)

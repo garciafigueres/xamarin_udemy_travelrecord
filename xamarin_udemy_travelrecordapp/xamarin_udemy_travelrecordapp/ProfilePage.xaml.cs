@@ -21,28 +21,14 @@ namespace xamarin_udemy_travelrecordapp
 
             //using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             //{
-                var postTable = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
+            //var postTable = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
+            var postTable = await Post.Read();
 
-                var categories = (from p in postTable
-                                  orderby p.CategoryId
-                                  select p.CategoryName).Distinct().ToList();
+            var categoriesCount = Post.PostCategories(postTable);
 
-                Dictionary<string, int> categoriesCount = new Dictionary<string, int>();
-                foreach (var category in categories)
-                {
-                    var count = (from post in postTable
-                                 where post.CategoryName == category
-                                 select post).ToList().Count();
+            categoriesListView.ItemsSource = categoriesCount;
 
-                    // Las expresiones de count y count2 son totalmente equivalentes
-                    //var count2 = postTable.Where(p => p.CategoryName == category).ToList().Count();
-
-                    categoriesCount.Add(category, count);
-                }
-
-                categoriesListView.ItemsSource = categoriesCount;
-
-                postCountLabel.Text = postTable.Count.ToString();
+            postCountLabel.Text = postTable.Count.ToString();
             //}
         }
     }

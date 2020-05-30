@@ -81,7 +81,8 @@ namespace xamarin_udemy_travelrecordapp
             //    DisplayInMap(posts);
             //}
 
-            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
+            //var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();            
+            var posts = await Post.Read();
             DisplayInMap(posts);
 
         }
