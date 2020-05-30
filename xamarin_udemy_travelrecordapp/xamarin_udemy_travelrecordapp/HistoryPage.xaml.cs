@@ -30,7 +30,6 @@ namespace xamarin_udemy_travelrecordapp
             // Para mostrar únicamente los posts del usuario que ha iniciado sesión:
             var posts = await Post.Read();
             postListView.ItemsSource = posts;
-
         }
 
         private void postListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
