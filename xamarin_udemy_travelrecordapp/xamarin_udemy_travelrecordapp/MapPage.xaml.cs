@@ -73,13 +73,16 @@ namespace xamarin_udemy_travelrecordapp
             GetLocation();
 
 
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Post>();
-                var posts = conn.Table<Post>().ToList();
+            //using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            //{
+            //    conn.CreateTable<Post>();
+            //    var posts = conn.Table<Post>().ToList();
 
-                DisplayInMap(posts);
-            }
+            //    DisplayInMap(posts);
+            //}
+
+            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
+            DisplayInMap(posts);
 
         }
 

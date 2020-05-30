@@ -27,6 +27,7 @@ namespace xamarin_udemy_travelrecordapp
             //    postListView.ItemsSource = posts;
             //}
 
+            // Para mostrar únicamente los posts del usuario que ha iniciado sesión:
             var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
             postListView.ItemsSource = posts;
 
