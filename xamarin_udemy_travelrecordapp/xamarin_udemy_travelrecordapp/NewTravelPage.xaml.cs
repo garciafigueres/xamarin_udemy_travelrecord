@@ -1,5 +1,6 @@
 ﻿using Plugin.Geolocator;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,9 +11,14 @@ namespace xamarin_udemy_travelrecordapp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewTravelPage : ContentPage
     {
+        Post post;
+
         public NewTravelPage()
         {
             InitializeComponent();
+
+            post = new Post();
+            containerStackLayout.BindingContext = post;
         }
 
         protected override async void OnAppearing()
@@ -33,6 +39,8 @@ namespace xamarin_udemy_travelrecordapp
                 var selectedVenue = venueListView.SelectedItem as Venue;
                 var firstCategory = selectedVenue.categories.FirstOrDefault();  // A venue can have more than one categories. We're only taking one.
 
+                /*                *
+                // Como tenemos el stackLayout bindeado, esto ya no hace falta. 
                 Post post = new Post()
                 {
                     Experience = experienceEntry.Text,
@@ -45,6 +53,18 @@ namespace xamarin_udemy_travelrecordapp
                     VenueName = selectedVenue.name,
                     UserId = App.user.Id,
                 };
+                 */
+
+
+                post.Experience = experienceEntry.Text;
+                post.CategoryId = firstCategory.id;
+                post.CategoryName = firstCategory.name;
+                post.Address = selectedVenue.location.address;
+                post.Distance = selectedVenue.location.distance;
+                post.Latitude = selectedVenue.location.lat;
+                post.Longitude = selectedVenue.location.lng;
+                post.VenueName = selectedVenue.name;
+                post.UserId = App.user.Id;
 
                 /*
                 // Con el bloque using nos aseguramos de que se llama al método dispose al salir
