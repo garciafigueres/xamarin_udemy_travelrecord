@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace xamarin_udemy_travelrecordapp.Model
 {
-    public class Users : INotifyPropertyChanged
+    public class User : INotifyPropertyChanged
     {
         private string id;
 
@@ -59,7 +59,7 @@ namespace xamarin_udemy_travelrecordapp.Model
             }
             else
             {
-                var user = (await App.MobileService.GetTable<Users>().Where(u => u.Email == email).ToListAsync()).FirstOrDefault();
+                var user = (await App.MobileService.GetTable<User>().Where(u => u.Email == email).ToListAsync()).FirstOrDefault();
 
                 if (user != null)
                 {
@@ -74,9 +74,9 @@ namespace xamarin_udemy_travelrecordapp.Model
             }
         }
 
-        public static async void Register(Users user)
+        public static async void Register(User user)
         {
-            await App.MobileService.GetTable<Users>().InsertAsync(user);
+            await App.MobileService.GetTable<User>().InsertAsync(user);
         }
 
 

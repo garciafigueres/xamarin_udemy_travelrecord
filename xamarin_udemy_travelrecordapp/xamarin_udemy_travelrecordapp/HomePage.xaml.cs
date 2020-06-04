@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_udemy_travelrecordapp.ViewModel;
 
 namespace xamarin_udemy_travelrecordapp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : TabbedPage
     {
+        HomeVM viewModel;
         public HomePage()
         {
             InitializeComponent();
-        }
 
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new NewTravelPage());
+            viewModel = new HomeVM();
+            BindingContext = viewModel;
         }
     }
 }

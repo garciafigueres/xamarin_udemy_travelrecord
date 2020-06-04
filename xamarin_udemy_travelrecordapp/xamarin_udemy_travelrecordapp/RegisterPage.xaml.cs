@@ -13,13 +13,13 @@ namespace xamarin_udemy_travelrecordapp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
-        Users user;
+        User user;
 
         public RegisterPage()
         {
             InitializeComponent();
 
-            user = new Users();
+            user = new User();
             containerStackLayout.BindingContext = user;
         }
 
@@ -34,7 +34,7 @@ namespace xamarin_udemy_travelrecordapp
                 //    Password = passwordEntry.Text
                 //};
 
-                Users.Register(user);
+                User.Register(user);
             }
             else
             {

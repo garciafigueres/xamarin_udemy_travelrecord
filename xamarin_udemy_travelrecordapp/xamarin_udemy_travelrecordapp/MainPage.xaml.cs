@@ -4,6 +4,7 @@ using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using xamarin_udemy_travelrecordapp.Model;
+using xamarin_udemy_travelrecordapp.ViewModel;
 
 namespace xamarin_udemy_travelrecordapp
 {
@@ -12,23 +13,18 @@ namespace xamarin_udemy_travelrecordapp
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        MainVM viewModel;
+
         public MainPage()
         {
             InitializeComponent();
 
             var assembly = typeof(MainPage);
 
+            viewModel = new MainVM();
+            BindingContext = viewModel;
+
             iconImage.Source = ImageSource.FromResource("xamarin_udemy_travelrecordapp.Assets.Images.plane.png", assembly);
-        }
-
-        private async void LoginButton_Clicked(object sender, EventArgs e)
-        {
-            bool canLogin = await Users.Login(emailEntry.Text, passwordEntry.Text);
-
-            if (canLogin)
-                await Navigation.PushAsync(new HomePage());
-            else
-                await DisplayAlert("Error", "Try Again", "Ok");
         }
 
         private void registerUserButton_Clicked(object sender, EventArgs e)
