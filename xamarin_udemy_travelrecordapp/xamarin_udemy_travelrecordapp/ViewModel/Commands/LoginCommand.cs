@@ -19,7 +19,7 @@ namespace xamarin_udemy_travelrecordapp.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            var user = (User)parameter;
+            var user = (Users)parameter;
 
             if (user == null)
                 return false;

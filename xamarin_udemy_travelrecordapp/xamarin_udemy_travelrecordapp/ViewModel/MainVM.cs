@@ -9,9 +9,9 @@ namespace xamarin_udemy_travelrecordapp.ViewModel
 {
     public class MainVM : INotifyPropertyChanged
     {
-        private User user;
+        private Users user;
 
-        public User User {
+        public Users User {
             get { return user; }
             set {
                 user = value;
@@ -28,7 +28,7 @@ namespace xamarin_udemy_travelrecordapp.ViewModel
             get { return email; }
             set {
                 email = value;
-                User = new User()
+                User = new Users()
                 {
                     Email = this.Email,
                     Password = this.Password
@@ -45,7 +45,7 @@ namespace xamarin_udemy_travelrecordapp.ViewModel
             get { return password; }
             set {
                 password = value;
-                User = new User()
+                User = new Users()
                 {
                     Email = this.Email,
                     Password = this.Password
@@ -62,13 +62,13 @@ namespace xamarin_udemy_travelrecordapp.ViewModel
 
         public MainVM()
         {
-            User = new User();
+            User = new Users();
             LoginCommand = new LoginCommand(this);
         }
 
         public async void Login()
         {
-            bool canLogin = await User.Login(User.Email, User.Password);
+            bool canLogin = await Users.Login(User.Email, User.Password);
 
             if (canLogin)
                 await App.Current.MainPage.Navigation.PushAsync(new HomePage());
