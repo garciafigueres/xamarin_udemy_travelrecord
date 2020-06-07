@@ -25,11 +25,6 @@ namespace xamarin_udemy_travelrecordapp
             BindingContext = viewModel;
 
             iconImage.Source = ImageSource.FromResource("xamarin_udemy_travelrecordapp.Assets.Images.plane.png", assembly);
-        }
-
-        private void registerUserButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new RegisterPage());
-        }
+        }        
     }
 }

@@ -7,44 +7,20 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarin_udemy_travelrecordapp.Model;
+using xamarin_udemy_travelrecordapp.ViewModel;
 
 namespace xamarin_udemy_travelrecordapp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
-        Users user;
+        RegisterVM viewModel;
 
         public RegisterPage()
         {
             InitializeComponent();
-
-            user = new Users();
-            containerStackLayout.BindingContext = user;
-        }
-
-        private async Task RegisterUser()
-        {
-            if (passwordEntry.Text == confirmPasswordEntry.Text)
-            {
-                // Como tenemos el StackLayout bindeado, no hace falta esto.
-                //Users user = new Users()
-                //{
-                //    Email = emailEntry.Text,
-                //    Password = passwordEntry.Text
-                //};
-
-                Users.Register(user);
-            }
-            else
-            {
-                await DisplayAlert("Error", "Passwords don't match.", "OK");
-            }
-        }
-
-        private async void registerButton_Clicked(object sender, EventArgs e)
-        {
-            await RegisterUser();
-        }
+            viewModel = new RegisterVM();
+            BindingContext = viewModel;
+        }        
     }
 }

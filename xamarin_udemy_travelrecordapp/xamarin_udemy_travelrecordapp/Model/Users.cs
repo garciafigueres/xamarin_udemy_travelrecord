@@ -39,6 +39,15 @@ namespace xamarin_udemy_travelrecordapp.Model
             }
         }
 
+        private string confirmPassword;
+
+        public string ConfirmPassword {
+            get { return confirmPassword; }
+            set {
+                confirmPassword = value;
+                OnPropertyChanged("ConfirmPassword");
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

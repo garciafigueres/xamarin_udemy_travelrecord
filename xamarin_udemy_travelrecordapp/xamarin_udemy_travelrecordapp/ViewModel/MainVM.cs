@@ -19,6 +19,8 @@ namespace xamarin_udemy_travelrecordapp.ViewModel
             }
         }
 
+        public RegisterNavigationCommand RegisterNavigationCommand { get; set; }
+
         public LoginCommand LoginCommand { get; set; }
 
 
@@ -64,6 +66,7 @@ namespace xamarin_udemy_travelrecordapp.ViewModel
         {
             User = new Users();
             LoginCommand = new LoginCommand(this);
+            RegisterNavigationCommand = new RegisterNavigationCommand(this);
         }
 
         public async void Login()
@@ -74,6 +77,11 @@ namespace xamarin_udemy_travelrecordapp.ViewModel
                 await App.Current.MainPage.Navigation.PushAsync(new HomePage());
             else
                 await App.Current.MainPage.DisplayAlert("Error", "Try Again", "Ok");
+        }
+
+        public async void Navigate()
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new RegisterPage());
         }
     }
 }
