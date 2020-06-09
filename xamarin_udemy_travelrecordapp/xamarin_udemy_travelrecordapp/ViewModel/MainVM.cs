@@ -11,9 +11,11 @@ namespace xamarin_udemy_travelrecordapp.ViewModel
     {
         private Users user;
 
-        public Users User {
+        public Users User
+        {
             get { return user; }
-            set {
+            set
+            {
                 user = value;
                 OnPropertyChanged("User");
             }
@@ -26,9 +28,11 @@ namespace xamarin_udemy_travelrecordapp.ViewModel
 
         private string email;
 
-        public string Email {
+        public string Email
+        {
             get { return email; }
-            set {
+            set
+            {
                 email = value;
                 User = new Users()
                 {
@@ -43,9 +47,11 @@ namespace xamarin_udemy_travelrecordapp.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Password {
+        public string Password
+        {
             get { return password; }
-            set {
+            set
+            {
                 password = value;
                 User = new Users()
                 {
@@ -58,8 +64,7 @@ namespace xamarin_udemy_travelrecordapp.ViewModel
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public MainVM()

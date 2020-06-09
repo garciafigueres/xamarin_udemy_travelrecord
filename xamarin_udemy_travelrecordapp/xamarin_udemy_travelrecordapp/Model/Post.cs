@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace xamarin_udemy_travelrecordapp.Model
 {
@@ -10,9 +11,11 @@ namespace xamarin_udemy_travelrecordapp.Model
     {
         private string id;
 
-        public string Id {
+        public string Id
+        {
             get { return id; }
-            set {
+            set
+            {
                 id = value;
                 OnPropertyChanged("Id");
             }
@@ -20,9 +23,11 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         private string experience;
 
-        public string Experience {
+        public string Experience
+        {
             get { return experience; }
-            set {
+            set
+            {
                 experience = value;
                 OnPropertyChanged("Experience");
             }
@@ -30,9 +35,11 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         private string venueName;
 
-        public string VenueName {
+        public string VenueName
+        {
             get { return venueName; }
-            set {
+            set
+            {
                 venueName = value;
                 OnPropertyChanged("VenueName");
             }
@@ -40,9 +47,11 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         private string categoryId;
 
-        public string CategoryId {
+        public string CategoryId
+        {
             get { return categoryId; }
-            set {
+            set
+            {
                 categoryId = value;
                 OnPropertyChanged("CategoryId");
             }
@@ -51,9 +60,11 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         private string categoryName;
 
-        public string CategoryName {
+        public string CategoryName
+        {
             get { return categoryName; }
-            set {
+            set
+            {
                 categoryName = value;
                 OnPropertyChanged("CategoryName");
             }
@@ -61,9 +72,11 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         private string address;
 
-        public string Address {
+        public string Address
+        {
             get { return address; }
-            set {
+            set
+            {
                 address = value;
                 OnPropertyChanged("Address");
             }
@@ -71,9 +84,11 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         private double latitude;
 
-        public double Latitude {
+        public double Latitude
+        {
             get { return latitude; }
-            set {
+            set
+            {
                 latitude = value;
                 OnPropertyChanged("Latitude");
             }
@@ -81,9 +96,11 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         private double longitude;
 
-        public double Longitude {
+        public double Longitude
+        {
             get { return longitude; }
-            set {
+            set
+            {
                 longitude = value;
                 OnPropertyChanged("Longitude");
             }
@@ -91,9 +108,11 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         private int distance;
 
-        public int Distance {
+        public int Distance
+        {
             get { return distance; }
-            set {
+            set
+            {
                 distance = value;
                 OnPropertyChanged("Distance");
             }
@@ -102,13 +121,52 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         private string userId;
 
-        public string UserId {
+        public string UserId
+        {
             get { return userId; }
-            set {
+            set
+            {
                 userId = value;
                 OnPropertyChanged("UserId");
             }
         }
+
+        private Venue venue;
+
+        [JsonIgnore]
+        public Venue Venue
+        {
+            get { return venue; }
+            set
+            {
+                venue = value;
+
+                if (venue.categories != null)
+                {
+                    var firstCategory = venue.categories.FirstOrDefault();  // A venue can have more than one categories. We're only taking one.
+
+                    if (firstCategory != null)
+                    {
+                        CategoryId = firstCategory.id;
+                        CategoryName = firstCategory.name;
+                    }
+                }
+
+                if (venue.location != null)
+                {
+                    Address = venue.location.address;
+                    Distance = venue.location.distance;
+                    Latitude = venue.location.lat;
+                    Longitude = venue.location.lng;
+                }
+
+                VenueName = venue.name;
+                UserId = App.user.Id;
+
+                OnPropertyChanged("Venue");
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

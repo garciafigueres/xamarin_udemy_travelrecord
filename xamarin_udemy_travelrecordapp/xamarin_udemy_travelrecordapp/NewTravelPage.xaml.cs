@@ -5,20 +5,21 @@ using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarin_udemy_travelrecordapp.Model;
+using xamarin_udemy_travelrecordapp.ViewModel;
 
 namespace xamarin_udemy_travelrecordapp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewTravelPage : ContentPage
     {
-        Post post;
+        NewTravelVM viewModel;
 
         public NewTravelPage()
         {
             InitializeComponent();
 
-            post = new Post();
-            containerStackLayout.BindingContext = post;
+            viewModel = new NewTravelVM();
+            BindingContext = viewModel;
         }
 
         protected override async void OnAppearing()
@@ -30,69 +31,6 @@ namespace xamarin_udemy_travelrecordapp
 
             var venues = await Venue.GetVenues(position.Latitude, position.Longitude);
             venueListView.ItemsSource = venues;
-        }
-
-        private async void ToolbarItem_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                var selectedVenue = venueListView.SelectedItem as Venue;
-                var firstCategory = selectedVenue.categories.FirstOrDefault();  // A venue can have more than one categories. We're only taking one.
-
-                /*                *
-                // Como tenemos el stackLayout bindeado, esto ya no hace falta. 
-                Post post = new Post()
-                {
-                    Experience = experienceEntry.Text,
-                    CategoryId = firstCategory.id,
-                    CategoryName = firstCategory.name,
-                    Address = selectedVenue.location.address,
-                    Distance = selectedVenue.location.distance,
-                    Latitude = selectedVenue.location.lat,
-                    Longitude = selectedVenue.location.lng,
-                    VenueName = selectedVenue.name,
-                    UserId = App.user.Id,
-                };
-                 */
-
-
-                post.Experience = experienceEntry.Text;
-                post.CategoryId = firstCategory.id;
-                post.CategoryName = firstCategory.name;
-                post.Address = selectedVenue.location.address;
-                post.Distance = selectedVenue.location.distance;
-                post.Latitude = selectedVenue.location.lat;
-                post.Longitude = selectedVenue.location.lng;
-                post.VenueName = selectedVenue.name;
-                post.UserId = App.user.Id;
-
-                /*
-                // Con el bloque using nos aseguramos de que se llama al método dispose al salir
-                // del mismo, ya que la clase SQLiteConnection ya incluye la interfaz IDisposable.
-                using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-                {
-                    conn.CreateTable<Post>();
-                    int rows = conn.Insert(post);
-                    conn.Close();
-
-                    if (rows > 0)
-                        DisplayAlert("Success", "Experience succesfully inserted", "Ok");
-                    else
-                        DisplayAlert("Failure", "Experience failed to be inserted", "Ok");
-                }
-                */
-
-                Post.Insert(post);
-                await DisplayAlert("Success", "Experience succesfully inserted", "Ok");
-            }
-            catch (NullReferenceException nre)
-            {
-                await DisplayAlert("Failure", "Experience failed to be inserted", "Ok");
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Failure", ex.Message, "Ok");
-            }
         }
     }
 }
