@@ -7,13 +7,14 @@ namespace xamarin_udemy_travelrecordapp.ViewModel.Commands
 {
     public class NavigationCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
         public HomeVM HomeViewModel;
 
         public NavigationCommand(HomeVM homeVM)
         {
             HomeViewModel = homeVM;
         }
+
+        public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {

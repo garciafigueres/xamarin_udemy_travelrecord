@@ -12,7 +12,6 @@ namespace xamarin_udemy_travelrecordapp.ViewModel.Commands
 
         public event EventHandler CanExecuteChanged;
 
-
         public RegisterNavigationCommand(MainVM viewModel)
         {
             this.viewModel = viewModel;
