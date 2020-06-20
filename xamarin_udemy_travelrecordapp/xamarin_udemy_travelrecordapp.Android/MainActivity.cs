@@ -9,6 +9,7 @@ using Android.OS;
 using System.IO;
 using Plugin.Permissions;
 using Microsoft.WindowsAzure.MobileServices;
+using Plugin.CurrentActivity;
 
 namespace xamarin_udemy_travelrecordapp.Droid
 {
@@ -36,14 +37,12 @@ namespace xamarin_udemy_travelrecordapp.Droid
 
             LoadApplication(new App(fullPath));
         }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            //Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            //base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+        
     }
 }
