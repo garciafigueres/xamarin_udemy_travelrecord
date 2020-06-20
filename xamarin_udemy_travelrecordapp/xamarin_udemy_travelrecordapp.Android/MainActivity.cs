@@ -22,7 +22,8 @@ namespace xamarin_udemy_travelrecordapp.Droid
 
             base.OnCreate(bundle);
 
-            Xamarin.Essentials.Platform.Init(this, bundle);
+            global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
+            Xamarin.Essentials.Platform.Init(this, bundle);     // SEGURO QUE HACE FALTA? VER SECCIÓN 113
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.FormsMaps.Init(this, bundle);
             CurrentPlatform.Init();
