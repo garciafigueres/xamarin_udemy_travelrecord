@@ -13,6 +13,7 @@
                    TextColor="DodgerBlue"
                    FontAttributes="Bold"/>
             <Label Text="posts"
+                   HorizontalOptions="Center"
                    TextColor="LightGray"/>
             <ListView x:Name="categoriesListView">
                 <ListView.ItemTemplate>

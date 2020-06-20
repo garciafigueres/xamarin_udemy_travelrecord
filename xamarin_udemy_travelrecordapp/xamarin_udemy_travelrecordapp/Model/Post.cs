@@ -235,7 +235,6 @@ namespace xamarin_udemy_travelrecordapp.Model
             }
         }
 
-
         private string categoryName;
 
         public string CategoryName
@@ -255,6 +254,7 @@ namespace xamarin_udemy_travelrecordapp.Model
             get { return address; }
             set
             {
+
                 address = value;
                 OnPropertyChanged("Address");
             }
@@ -280,7 +280,7 @@ namespace xamarin_udemy_travelrecordapp.Model
             set
             {
                 longitude = value;
-                OnPropertyChanged("Longitude");
+                OnPropertyChanged("Latitude");
             }
         }
 
@@ -295,7 +295,6 @@ namespace xamarin_udemy_travelrecordapp.Model
                 OnPropertyChanged("Distance");
             }
         }
-
 
         private string userId;
 
@@ -321,7 +320,7 @@ namespace xamarin_udemy_travelrecordapp.Model
 
                 if (venue.categories != null)
                 {
-                    var firstCategory = venue.categories.FirstOrDefault();  // A venue can have more than one categories. We're only taking one.
+                    var firstCategory = venue.categories.FirstOrDefault();
 
                     if (firstCategory != null)
                     {
@@ -337,7 +336,6 @@ namespace xamarin_udemy_travelrecordapp.Model
                     Latitude = venue.location.lat;
                     Longitude = venue.location.lng;
                 }
-
                 VenueName = venue.name;
                 UserId = App.user.Id;
 
@@ -348,12 +346,6 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public static async void Insert(Post post)
         {
             await App.MobileService.GetTable<Post>().InsertAsync(post);
@@ -361,12 +353,13 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         public static async Task<List<Post>> Read()
         {
-            return await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
+            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
+
+            return posts;
         }
 
         public static Dictionary<string, int> PostCategories(List<Post> posts)
         {
-
             var categories = (from p in posts
                               orderby p.CategoryId
                               select p.CategoryName).Distinct().ToList();
@@ -376,10 +369,7 @@ namespace xamarin_udemy_travelrecordapp.Model
             {
                 var count = (from post in posts
                              where post.CategoryName == category
-                             select post).ToList().Count();
-
-                // Las expresiones de count y count2 son totalmente equivalentes
-                //var count2 = postTable.Where(p => p.CategoryName == category).ToList().Count();
+                             select post).ToList().Count;
 
                 categoriesCount.Add(category, count);
             }
@@ -387,7 +377,11 @@ namespace xamarin_udemy_travelrecordapp.Model
             return categoriesCount;
         }
 
-
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
 
     }
 */

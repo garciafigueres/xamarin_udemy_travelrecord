@@ -6,8 +6,7 @@
              mc:Ignorable="d"
              x:Class="xamarin_udemy_travelrecordapp.HistoryPage">
 
-    <ListView x:Name="postListView"
-              ItemSelected="postListView_ItemSelected">
+    <ListView x:Name="postListView">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell Text="{Binding Experience}"/>

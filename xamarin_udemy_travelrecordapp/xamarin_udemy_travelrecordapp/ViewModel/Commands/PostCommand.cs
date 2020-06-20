@@ -66,7 +66,6 @@ namespace xamarin_udemy_travelrecordapp.ViewModel.Commands
 
                 return false;
             }
-
             return false;
         }
 
