@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.ComponentModel;
 using Newtonsoft.Json;
+using System;
 
 namespace xamarin_udemy_travelrecordapp.Model
 {
@@ -140,6 +141,15 @@ namespace xamarin_udemy_travelrecordapp.Model
                 UserId = App.user.Id;
 
                 OnPropertyChanged("Venue");
+            }
+        }
+
+        private DateTimeOffset createdat;
+
+        public DateTimeOffset CREATEDAT {
+            get { return createdat; }
+            set { createdat = value;
+                OnPropertyChanged("createdat");
             }
         }
 

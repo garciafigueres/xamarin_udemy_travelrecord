@@ -4,12 +4,21 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="xamarin_udemy_travelrecordapp.HistoryPage">
+             x:Class="xamarin_udemy_travelrecordapp.HistoryPage"
+             xmlns:converters="clr-namespace:xamarin_udemy_travelrecordapp.ViewModel.Converters">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DateTimeToStringConverter x:Key="converter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ListView x:Name="postListView">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding Experience}"/>
+                <TextCell Text="{Binding Experience}"
+                          Detail="{Binding CREATEDAT, Converter={StaticResource converter}}"
+                          />
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
