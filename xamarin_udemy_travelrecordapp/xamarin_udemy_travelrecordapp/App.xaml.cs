@@ -1,4 +1,5 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,7 +11,9 @@ namespace xamarin_udemy_travelrecordapp
     {
         public static string DatabaseLocation = string.Empty;
         public static MobileServiceClient MobileService = new MobileServiceClient("https://gftravelrecordappxam.azurewebsites.net");
-        public static Users user = new Users();
+        //public static Users user = new Users();
+
+        public static IMobileServiceSyncTable<Post> postsTable;
 
         public App()
         {
@@ -23,6 +26,13 @@ namespace xamarin_udemy_travelrecordapp
             InitializeComponent();
             MainPage = new NavigationPage(new MainPage());
             DatabaseLocation = databaseLocation;
+
+            // Offline Storage and Sync
+            var store = new MobileServiceSQLiteStore(databaseLocation);
+            store.DefineTable<Post>();
+            MobileService.SyncContext.InitializeAsync(store);
+
+            postsTable = MobileService.GetSyncTable<Post>();
         }
 
         protected override void OnStart()
