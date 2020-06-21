@@ -25,5 +25,19 @@ namespace xamarin_udemy_travelrecordapp
 
             viewModel.UpdatePosts();
         }
+
+        private void MenuItem_Clicked(object sender, System.EventArgs e)
+        {
+            var post = (Post)((MenuItem)sender).CommandParameter;
+            viewModel.DeletePost(post);
+
+            viewModel.UpdatePosts();
+        }
+
+        private async void postListView_Refreshing(object sender, System.EventArgs e)
+        {
+            await viewModel.UpdatePosts();
+            postListView.IsRefreshing = false;
+        }
     }
 }
