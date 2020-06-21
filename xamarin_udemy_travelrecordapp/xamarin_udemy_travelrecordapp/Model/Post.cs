@@ -5,6 +5,7 @@ using System.Linq;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using System;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace xamarin_udemy_travelrecordapp.Model
 {
@@ -159,14 +160,21 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         public static async void Insert(Post post)
         {
-            await App.MobileService.GetTable<Post>().InsertAsync(post);
+            //await App.MobileService.GetTable<Post>().InsertAsync(post);
+
+            await App.postsTable.InsertAsync(post);
+            await App.MobileService.SyncContext.PushAsync();
         }
 
         public static async Task<bool> Delete(Post post)
         {
             try
             {
-                await App.MobileService.GetTable<Post>().DeleteAsync(post);
+                //await App.MobileService.GetTable<Post>().DeleteAsync(post);
+
+                await App.postsTable.DeleteAsync(post);
+                await App.MobileService.SyncContext.PushAsync();
+
                 return true;
             }
             catch (Exception ex)
@@ -177,7 +185,9 @@ namespace xamarin_udemy_travelrecordapp.Model
 
         public static async Task<List<Post>> Read()
         {
-            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
+            //var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
+
+            var posts = await App.postsTable.Where(p => p.UserId == App.user.Id).ToListAsync();
 
             return posts;
         }

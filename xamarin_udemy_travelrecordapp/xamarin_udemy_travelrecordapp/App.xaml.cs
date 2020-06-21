@@ -1,5 +1,6 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+using Microsoft.WindowsAzure.MobileServices.Sync;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,7 +12,7 @@ namespace xamarin_udemy_travelrecordapp
     {
         public static string DatabaseLocation = string.Empty;
         public static MobileServiceClient MobileService = new MobileServiceClient("https://gftravelrecordappxam.azurewebsites.net");
-        //public static Users user = new Users();
+        public static Users user = new Users();
 
         public static IMobileServiceSyncTable<Post> postsTable;
 
